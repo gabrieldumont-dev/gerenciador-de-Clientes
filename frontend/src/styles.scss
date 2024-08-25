@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+// $p-1: white;
+// $p-2: #F8F9FA;
+// $p-3: #CED4DA;
+// $p-4: #6C757D;
+
+$p-1: white;
+$p-2: #E9ECEF;
+$p-3: #CED4DA;
+$p-4: #6C757D;
+
+$s-1: #64A67F;
+$s-2: #488f60;
+
+$d-1: #DA5869;
+$d-2: #cc414f;
+
+$i-1: #5e6397;
+$i-2: #52598b;
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+button{
+    outline: none;
+    border: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    padding: 7px 10px;
+
+    font-size: 10pt;
+    font-weight: 500;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    img{
+        height: 15pt;
+    }
+}
+
+.btn-branco{
+    background-color: $p-1;
+    border: solid 1px $p-3;
+}
+
+.btn-branco:hover{
+    background-color: $p-2;
+    border: solid 1px $p-4;
+}
+
+.btn-verde{
+    color: white;
+    background-color: $s-1;
+}
+
+.btn-verde:hover{
+    background-color: $s-2;
+}
+
+.btn-vermelho{
+    color: white;
+    background-color: $d-1;
+}
+
+.btn-vermelho:hover{
+    background-color: $d-2;
+}
+
+.btn-azul{
+    color: white;
+    background-color: $i-1;
+}
+
+.btn-azul:hover{
+    background-color: $i-2;
+}
+
+.main-model{
+    position: fixed;
+    top: 0px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    background-color: rgba(black, $alpha: 0.5);
+
+    transition: all 0.3s ease;
+
+    .box-model{
+        transform: translateY(-50px);
+        transition: all 0.3s ease;
+    }
+}
+
+.main-model-open{
+    pointer-events: auto;
+    opacity: 1 !important;
+
+    .box-model{
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+.box-form{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+
+    background-color: $p-2;
+    border: solid 1px $p-3;
+    border-radius: 10px;
+
+    h1{
+        font-size: 13pt;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .box-select{
+        display: flex;
+        gap: 10px;
+
+        select{
+            outline: none;
+
+            width: 100%;
+            padding: 7px;
+
+            font-size: 10pt;
+            font-weight: 400;
+
+            background-color: $p-1;
+            border: solid 1px $p-3;
+            border-radius: 5px;
+        }
+
+        select:focus{
+            border: solid 1px $p-4;
+        }
+
+        button{
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+    }
+    .box-produtos{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        max-height: 40vh;
+        overflow-y: auto;
+
+        p{
+            font-size: 10pt;
+        }
+
+        .box-produto{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            padding: 10px;
+
+            background-color: $p-3;
+            border-radius: 10px;
+        
+            h2{
+                font-size: 10pt;
+                font-weight: 400;
+            }
+
+            h2:nth-child(1){
+                font-weight: 600;
+            }
+
+            .box-btnQuantidade{
+                display: flex;
+                justify-content: space-between;
+
+                div{
+                    display: flex;
+                }
+
+                p{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    font-size: 10pt;
+                    padding: 7px 10px;
+                }
+
+                button{
+                    height: 30px;
+                    width: 30px;
+                    border-radius: 50% !important;
+
+                    img{
+                        height: 100%;
+                    }
+                }
+            }
+        }
+    }
+
+    .box-inputs{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        div{
+            display: flex;
+            flex-direction: column;
+
+            label{
+                font-size: 11pt;
+                font-weight: 500;
+            }
+
+            input{
+                outline: none;
+
+                padding: 7px;
+
+                font-size: 10pt;
+                font-weight: 400;
+
+                background-color: $p-1;
+                border: solid 1px $p-3;
+                border-radius: 5px;
+            }
+
+            input:focus{
+                border: solid 1px $p-4;
+            }
+        }
+
+        p{
+            color: $d-2;
+            font-size: 9pt;
+        }
+    }
+
+    .box-buttons{
+        display: flex;
+        gap: 10px;
+
+        button{
+            width: 100%;
+        }
+    }
+
+    a{
+        color: black;
+        font-size: 9pt;
+    }
+}

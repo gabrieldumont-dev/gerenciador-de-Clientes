@@ -1,0 +1,17 @@
+@import "../clientes/clientes.component.scss";
+
+.box-header{
+    margin: 10px 0px;
+    padding: 0px !important;
+    background-color: $p-1;
+    cursor: pointer;
+
+    h1{
+        width: fit-content !important;
+        background-color: transparent !important;
+    }
+}
+
+.box-header:hover{
+    background-color: $p-2;
+}

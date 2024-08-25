@@ -1,0 +1,26 @@
+<main>
+    <div class="box-form">
+        <h1>Bem vindo(a)</h1>
+        <div class="box-inputs">
+            <div>
+                <label>Nome</label>
+                <input type="text" [(ngModel)]="conta.nome">
+            </div>
+            <div>
+                <label>Email</label>
+                <input type="text" [(ngModel)]="conta.email">
+            </div>
+            <div>
+                <label>Senha</label>
+                <input type="password" [(ngModel)]="conta.senha">
+            </div>
+            @if (msg){
+                <p>{{msg}}</p>
+            }
+        </div>
+        <div class="box-buttons">
+            <button class="btn-azul" (click)="cadastrar()">Cadastrar</button>
+        </div>
+        <a href="/">Já possui conta? Entrar!</a>
+    </div>
+</main>

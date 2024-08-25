@@ -1,0 +1,106 @@
+<div class="main-model" [class.main-model-open]="dataService.openModel[0]" (mouseup)="cancelarCliente()">
+    <div class="box-form box-model" (mousedown)="dataService.clickModel[0] = true">
+        <h1>Cliente</h1>
+        <div class="box-inputs">
+            <div>
+                <label>Nome</label>
+                <input type="text" [(ngModel)]="cliente.nome">
+            </div>
+            <div>
+                <label>Telefone</label>
+                <input type="text" mask="(00) 00000-0000" [(ngModel)]="cliente.telefone">
+            </div>
+            <div>
+                <label>Email</label>
+                <input type="text" [(ngModel)]="cliente.email">
+            </div>
+            @if (msg){
+                <p>{{msg}}</p>
+            }
+        </div>
+        <div class="box-buttons">
+            <button class="btn-verde" (click)="postCliente()">Salvar</button>
+            @if (cliente._id){
+                <button class="btn-vermelho" (click)="deleteCliente()">Deletar</button>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="main-model" [class.main-model-open]="dataService.openModel[1]" (mouseup)="cancelarPedido()">
+    <div class="box-form box-model" (mousedown)="dataService.clickModel[1] = true">
+        <h1>Pedido</h1>
+        <div class="box-select">
+            <select [(ngModel)]="produtoSelect" (change)="dataService.clickModel[1] = true">
+                <option value="" disabled selected>Selecione um produto</option>
+                @for (item of produtos; track $index){
+                    <option [value]="item._id">{{item.nome}}</option>
+                }
+            </select>
+            <button class="btn-azul" (click)="addProduto()"><img src="../../assets/icons/add.svg"></button>
+        </div>
+        <div class="box-produtos">
+            @for (item of pedido.produtos; track $index) {
+                <div class="box-produto">
+                    <h2>{{item.nome}}</h2>
+                    <h2>R$ {{item.total}}</h2>
+                    <div class="box-btnQuantidade">
+                        <div>
+                            <button class="btn-azul" (click)="altararQuantidadeProduto($index, '-')"><img src="../../assets/icons/remove.svg"></button>
+                            <p>{{item.quantidade}}</p>
+                            <button class="btn-azul" (click)="altararQuantidadeProduto($index, '+')"><img src="../../assets/icons/add.svg"></button>
+                        </div>
+                        <button class="btn-vermelho" (click)="removerProduto($index)"><img src="../../assets/icons/delete.svg"></button>
+                    </div>
+                </div>
+            } @empty {
+                <p>Não há produtos no pedido</p>
+            }
+            @if (pedido.produtos.length > 0){
+                <p>Total R$ {{pedido.total}}</p>
+            }
+        </div>
+        <div class="box-buttons">
+            <button class="btn-verde" (click)="postPedido()">Salvar</button>
+            @if (pedido._id){
+                <button class="btn-vermelho" (click)="deletePedido()">Deletar</button>
+            }
+        </div>
+    </div>
+</div>
+
+<main>
+    <header>
+        <button class="btn-azul" (click)="dataService.openModel[0] = true"><img src="../../assets/icons/add.svg">Novo cliente</button>
+    </header>
+    <div class="content-list">
+        @for (item of clientes; track $index) {
+            <div class="box-item">
+                <div class="box-header">
+                    <h1 (click)="editCliente(item)">{{item.nome}}</h1>
+                    <div>
+                        <button class="btn-verde" (click)="abrirConversa(item)"><img src="../../assets/icons/chat.svg"></button>
+                        <!-- <button class="btn-azul" (click)="editCliente(cliente)"><img src="../../assets/icons/edit.svg"></button> -->
+                        <button class="btn-azul" (click)="togglePedidos(item)"><img src="../../assets/icons/arrow-down.svg" [class.icon-rotate]="item.toggle"></button>
+                    </div>
+                </div>
+                <div class="box-toggle" [class.box-toggle-true]="item.toggle">
+                    @for (itemPedido of item.pedidos; track $index){
+                        <div class="box-pedido" (click)="editPedido(itemPedido)">
+                            <h2>Pedido {{itemPedido.data}}</h2>
+                            @for (itemProduto of itemPedido.produtos; track $index){
+                                <p>{{itemProduto.quantidade}} - {{itemProduto.nome}} - R$ {{itemProduto.total}}</p>
+                            }
+                            <p>Total R${{itemPedido.total}}</p>
+                        </div>
+                    }
+                    <div class="box-button">
+                        <button class="btn-azul" (click)="novoPedido(item)"><img src="../../assets/icons/add.svg">Novo pedido</button>
+                    </div>
+                </div>
+            </div>
+        } @empty {
+            <h1>Nenhum produto cadastrado</h1>
+        }
+    </div>
+</main>

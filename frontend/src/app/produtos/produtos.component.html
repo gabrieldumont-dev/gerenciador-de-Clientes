@@ -1,0 +1,42 @@
+<div class="main-model" [class.main-model-open]="dataService.openModel[2]" (mouseup)="cancelar(2)">
+    <div class="box-form box-model" (mousedown)="dataService.clickModel[2] = true">
+        <h1>Produtos</h1>
+        <div class="box-inputs">
+            <div>
+                <label>Nome</label>
+                <input type="text" [(ngModel)]="produto.nome">
+            </div>
+            <div>
+                <label>Preço</label>
+                <input type="text" mask="separator.2" thousandSeparator="." decimalMarker="," [(ngModel)]="produto.preco">
+            </div>
+            @if (msg){
+                <p>{{msg}}</p>
+            }
+        </div>
+        <div class="box-buttons">
+            <button class="btn-verde" (click)="postProduto()">Salvar</button>
+            @if (produto._id){
+                <button class="btn-vermelho" (click)="deleteProduto()">Deletar</button>
+            }
+        </div>
+    </div>
+</div>
+
+<main>
+    <header>
+        <button class="btn-azul" (click)="dataService.openModel[2] = true"><img src="../../assets/icons/add.svg">Novo produto</button>
+    </header>
+    <div class="content-list">
+        @for (item of produtos; track $index) {
+            <div class="box-item">
+                <div class="box-header" (click)="editProduto(item)">
+                    <h1>{{item.nome}}</h1>
+                    <h1>R$ {{item.preco}}</h1>
+                </div>
+            </div>
+        } @empty {
+            <h1>Nenhum produto cadastrado</h1>
+        }
+    </div>
+</main>
